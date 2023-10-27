@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>praktukum_tgl_13</title>
+    <style>
+        * {
+            color:rgb(52, 39, 9) ;;
+        }
+        .atas ul{
+            list-style: none;
+            gap: 20px;
+        }
+        .atas li a{
+            text-decoration: none;
+        }
+        .atas, #contact{
+            display: flex;
+            margin-top: 30px;
+            justify-content: space-between;
+            background-color:rgba(90, 54, 30, 0.527) ;
+        }
+
+        .container{
+            display: grid;
+            grid-template-rows: 0.5fr 2fr auto;
+            grid-template-columns: 1fr 3fr;
+            margin: auto;
+            grid-template-areas: "header header" "Aside main"  "footer footer";
+        }
+        header {
+            grid-area: header;
+            
+        }
+        aside {
+            grid-area: Aside;
+            margin: 30px;
+        }
+        footer {
+            grid-area: footer;
+        }
+        
+        main{
+            grid-area: main;
+        }
+        footer #contact{
+            display :flex;
+            margin: 0px;
+        }
+        footer #contact ul{
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            text-align:right ;
+            margin-right: 28px;
+        }
+    </style>
+</head>
+
+<body style="background-color:rgba(90, 54, 30, 0.527); margin:0;">
+    <div class="container">
+        <header>
+            <div class="atas" style="text-align: justify; ">
+                <h1 style="margin: 12px; margin-left:100px;">Selvi <span style="color: rgba(88, 57, 36, 0.527) ;">Indriani</span></h1>
+                <ul style="display: flex;margin-right:29px;">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skill">Skill</a></li>
+                    <li><a href="#project">Project</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </header>
+        <aside>
+            <img src="selvi.jpeg" width="250" height="350">
+        </aside>
+       
+        <main>
+            <div style="text-align: center;" id="about">
+                <h3 >About</h3>
+                saya selvi indriani cantik bangettt sukanya nonton drakor sampe ketiduran <br><br>
+            </div>
+        
+            <div style="text-align: center;"id="project">
+                <h3 >Project</h3>
+                belum ada projek <br><br>
+            </div>
+        
+            <div style="text-align: center;" id="skill">
+                <h3>Skill</h3>
+                ......
+            </div>
+        
+        </main>
+
+        <footer>
+            <div style="margin: 30px;">
+                <h2>Tinggalkan Jejak Anda :</h2>
+                <label for="1">Email    : </label>
+                <input type="text" name="b" id="1"> <br> <br>
+                <label for="2">Kesan    :</label>
+                <input type="text" name="b" id="2"> <br><br>
+                <label for="3">Pesan    :</label>
+                <input type="text" name="b" id="3"> <br><br>
+                <input type="submit" value="submit">
+            </div>
+            <div id="contact">
+                <h3 style="text-align: center; margin: 12px; margin-left:100px;">Contact</h3>
+                <ul style="text-align:right ;">
+                    <li>Instagram : Selvindrianii_</li> <br>
+                    <li>linkedln : selvi indriani</li><br>
+                    <li>WhatsApp : 0819194847XXXX</li><br>
+                </ul>
+            </div>
+            <div style="margin: 30px;">
+                <h2>Rating Web Saya : </h2>
+                <input type="radio" name="a" id="satu">
+                <label for="satu">Sangat Menarik</label>
+                <input type="radio" name="a" id="dua">
+                <label for="dua">Menarik</label>
+                <input type="radio" name="a" id="tiga">
+                <label for="tiga">Kurang Menarik</label>
+                <input type="radio" name="a" id="empat">
+                <label for="empat">Tidak Menarik</label><br><br>
+                <input type="submit" value="submit">
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
