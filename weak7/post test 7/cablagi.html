@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>game tic tac toe</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #a27171;
+            color:rgb(0, 0, 0);
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            transition: background-color 1s ease;
+        }
+        center {
+            margin-top: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            margin-top: 20px;
+        }
+        .cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background-color: #d0bfbf;
+            cursor: grab;
+        }
+        .cell:hover {
+            background-color: rgb(198, 103, 103);
+        }
+        .status {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #reset {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #toggleDarkMode {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .darkMode{
+            background-color: rgb(90, 70, 70);
+            
+            color: #fff;
+        }
+        .menang{
+            background-color: rgb(172, 107, 137);
+        }
+            
+    </style>
+</head>
+    <body>
+        <center>
+            <h1>Tic-Tac-Toe</h1>
+            <button id="toggleDarkMode" onclick="dark()">Toggle Dark Mode</button>
+        </center>
+        <div class="board" id="board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+        <div class="status" id="status">
+            <h3>mainin aku</h3>
+        </div>
+        <button id="reset">reset</button>
+</body>
+<script>
+    const kotak=document.querySelectorAll('.cell');
+    const statusGame=document.getElementById('status');
+    const resetUlang=document.getElementById('reset');
+    const darkMode=document.getElementById('toggleDarkMode')
+    let x="X";
+    let o="O";
+
+    const menang=[
+        [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]
+    ];
+
+    let board=["","","","","","","","",""];
+    let giliran=x;
+    let pemain="X";
+    let running=false;
+    mulai();
+
+    function mulai(){
+        kotak.forEach(cell => cell.addEventListener('click', kotakClick));
+        resetUlang.addEventListener('click',resetGame);
+        statusGame.textContent=`${pemain} Kamu Duluan`;
+        running=true;
+    }
+
+    function kotakClick(){
+        const index=this.dataset.index;
+        if(board[index]!="" || !running){
+            return;
+        }
+        updateKotak(this,index);
+        checkPemenang();
+    }
+
+    function updateKotak(cell,index){
+        board[index]=pemain;
+        cell.innerHTML=giliran;
+    }
+
+    function gantiPemain(){
+        pemain=(pemain=='X') ? "O" :"X";
+        giliran=(giliran==x) ? o :x;
+        statusGame.textContent=`Giliran ${pemain} `;
+    }
+
+    function checkPemenang(){
+        let pemenang=false;
+        for(let i=0;i<menang.length;i++){
+            const posisi=menang[i];
+            const cell1=board[posisi[0]];
+            const cell2=board[posisi[1]];
+            const cell3=board[posisi[2]];
+            if(cell1=="" || cell2=="" || cell3==""){
+                continue;
+            }
+            if(cell1==cell2 && cell2==cell3){
+                pemenang=true;
+                kotak[posisi[0]].classList.toggle('menang');
+                kotak[posisi[1]].classList.toggle('menang');
+                kotak[posisi[2]].classList.toggle('menang');
+            }
+        }
+
+        if(pemenang){
+            statusGame.textContent=`Yeay ${pemain}  Menang`;
+            running=false;
+        }
+        else if(!board.includes("")){
+            statusGame.textContent="Gak Ada Yang Menang, Main Lagi";
+            running=false;
+        }
+        else{
+            gantiPemain();
+        }
+    }
+
+    function resetGame(){
+        board=["","","","","","","","",""];
+        giliran=x;
+        pemain="X";
+        running=true;
+        statusGame.textContent=`${pemain} Kamu Duluan`;
+        kotak.forEach(cell=>{
+            cell.innerHTML="";
+            cell.classList.remove('menang');
+        });
+    }
+
+    function dark(){
+        kotak.forEach(cell=>{
+            cell.classList.toggle("darkMode");
+            darkMode.textContent = cell.classList.contains("darkMode") ? "Toggle Light Mode": "Toggle Dark Mode";
+        });
+    }
+</script>
+</html>
